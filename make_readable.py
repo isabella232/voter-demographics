@@ -109,7 +109,8 @@ with open('data.csv') as f:
 
             if data in mapping:
                 row[column] = mapping[data]
-                output.append(row)
+
+        output.append(row)
 
 with open('simple.csv', 'w') as f:
     writer = csv.DictWriter(f, fieldnames=FIELD_MAPPINGS.keys())
