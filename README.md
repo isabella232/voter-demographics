@@ -1,5 +1,12 @@
 # voter-demographics
 
+## Getting setup
+
+```
+mkvirtualenv voter-demographics
+pip install -r requirements.txt
+```
+
 ## Getting the data
 
 ```
