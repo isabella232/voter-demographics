@@ -14,7 +14,10 @@ curl -O http://thedataweb.rm.census.gov/pub/cps/supps/nov12pub.zip
 unzip nov12pub.zip
 in2csv -s schema.csv nov12pub.dat > nov12pub.csv
 csvcut -c gestfips,ptdtrace,pehspnon,pesex,prtage,pes1,pes2,pes3,pes4,pes5,pes6,pes7,pes8 nov12pub.csv > data.csv
+python make_readable.py
 ```
+
+Output is `simple.csv`.
 
 ## Sources
 
