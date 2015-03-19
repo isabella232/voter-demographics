@@ -15,9 +15,10 @@ unzip nov12pub.zip
 in2csv -s schema.csv nov12pub.dat > nov12pub.csv
 csvcut -c pwsswgt,gestfips,ptdtrace,pehspnon,pesex,prtage,pes1,pes2,pes3,pes4,pes5,pes6,pes7,pes8 nov12pub.csv > data.csv
 python make_readable.py
+python analyze.py
 ```
 
-Output is `simple.csv`.
+Output is `states.csv`.
 
 ## Sources
 

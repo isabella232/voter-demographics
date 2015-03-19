@@ -126,6 +126,9 @@ def main():
     write_output(output)
 
 def load_data():
+    """
+    Load the initial table data from a CSV.
+    """
     with open('simple.csv') as f:
         reader = csv.reader(f)
         next(reader)
@@ -135,12 +138,21 @@ def load_data():
     return table
 
 def sum_weights(table):
+    """
+    Sum the weight column of a table to generate a population estimate.
+    """
     return table.columns['weight'].sum()
 
 def pct(numerator, denominator):
+    """
+    Compute a two-decimal percentage.
+    """
     return (numerator / denominator * 100).quantize(decimal.Decimal('.01'), rounding=decimal.ROUND_DOWN)
 
 def compute_aggregates(state, table):
+    """
+    Compute aggregates for a table.
+    """
     # Filter out anyone who didn't answer questions, e.g. underage (voted == -1)
     # and those who self-report they are not eligible to vote
     population_table = table.where(lambda r: r['voted'] != '-1' and r['why_not_registered'] != 'Not eligible to vote')
@@ -190,6 +202,7 @@ def compute_aggregates(state, table):
     return {
         'state': state,
         'state_moe': 'TKTK',
+
         'population': population,
         'population_white_only_nonhispanic': population_white_only_nonhispanic,
         'population_white_only_nonhispanic_pct': pct(population_white_only_nonhispanic, population),
@@ -203,6 +216,7 @@ def compute_aggregates(state, table):
         'population_female_pct': pct(population_female, population),
         'population_male': population_male,
         'population_male_pct': pct(population_male, population),
+
         'registered': registered,
         'registered_pct': pct(registered, population),
         'registered_white_only_nonhispanic': registered_white_only_nonhispanic,
@@ -217,6 +231,7 @@ def compute_aggregates(state, table):
         'registered_female_pct': pct(registered_female, registered),
         'registered_male': registered_male,
         'registered_male_pct': pct(registered_male, registered),
+
         'not_registered': not_registered,
         'not_registered_pct': pct(not_registered, population),
         'not_registered_white_only_nonhispanic': not_registered_white_only_nonhispanic,
@@ -231,6 +246,7 @@ def compute_aggregates(state, table):
         'not_registered_female_pct': pct(not_registered_female, not_registered),
         'not_registered_male': not_registered_male,
         'not_registered_male_pct': pct(not_registered_male, not_registered),
+
         'unknown': unknown,
         'unknown_pct': pct(unknown, population),
         'unknown_white_only_nonhispanic': unknown_white_only_nonhispanic,
@@ -245,6 +261,7 @@ def compute_aggregates(state, table):
         'unknown_female_pct': pct(unknown_female, population),
         'unknown_male': unknown_male,
         'unknown_male_pct': pct(unknown_male, population),
+
         'all_registered': all_registered,
         'all_registered_pct': pct(all_registered, population),
         'all_registered_white_only_nonhispanic': all_registered_white_only_nonhispanic,
@@ -262,6 +279,9 @@ def compute_aggregates(state, table):
     }
 
 def write_output(output):
+    """
+    Write aggregate output to CSV.
+    """
     with open('states.csv', 'w') as f:
         writer = csv.DictWriter(f, fieldnames=OUTPUT_HEADERS)
 
