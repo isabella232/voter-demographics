@@ -18,6 +18,7 @@ STATES = {
 FIPS = { v: k for k, v in STATES.items() }
 
 FIELD_MAPPINGS = OrderedDict([
+    ('pwsswgt', {}),
     ('gestfips', FIPS),
     ('ptdtrace', {
         '1': 'White Only',
@@ -133,6 +134,7 @@ FIELD_MAPPINGS = OrderedDict([
 ])
 
 OUTPUT_HEADERS = OrderedDict([
+    ('pwsswgt', 'weight'),
     ('gestfips', 'state'),
     ('ptdtrace', 'race'),
     ('pehspnon', 'hispanic'),
@@ -161,6 +163,15 @@ with open('data.csv') as f:
 
             if data in mapping:
                 value = mapping[data]
+            # Add implied decimal point to weighting column
+            elif column == 'pwsswgt':
+                d = row[column]
+
+                if d == '0':
+                    value = '0'
+                else:
+                    l = len(d)
+                    value = row[column][:l - 4] + '.' + row[column][-4:]
             else:
                 value = data
 
