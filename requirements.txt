@@ -1,1 +1,2 @@
 csvkit==0.9.0
+journalism==0.4.0
