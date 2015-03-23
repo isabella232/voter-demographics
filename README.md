@@ -20,6 +20,8 @@ python analyze.py
 
 Output is `states.csv`.
 
+**Note:** this file does not include margin-of-error calculations. See the Census Bureau documentation for details on how to calculate this for each derived statistic. In many cases the error can be quite large.
+
 ## Sources
 
 * [CPS Data Download FTP](http://thedataweb.rm.census.gov/ftp/cps_ftp.html)
